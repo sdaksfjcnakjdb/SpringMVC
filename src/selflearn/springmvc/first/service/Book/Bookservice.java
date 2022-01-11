@@ -97,6 +97,12 @@ public class Bookservice {
     }
 
 
+    //订阅书籍
+    public static void  addbook(UserBook userBook){
+        context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
+        UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
+        userbookDao.add (userBook);
+    }
 
     @Test
     public void  test(){
