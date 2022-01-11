@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="selflearn.springmvc.first.Dao.user.UserDao">
+
+
+
+    <!-- 添加一个信息 -->
+    <insert id="add" parameterType="user">
+        insert into person
+            (name,password,createtime,phone)
+        values(#{name},#{password},now(),#{phone})
+    </insert>
+    <!--    修改信息-->
+    <update id="update" parameterType="user">
+        update person set
+                               name = #{name},
+                               password = #{password},
+                               phone = #{phone},
+                               createtime = now()
+        where id = #{id}
+    </update>
+    <!--删除信息-->
+    <delete id="delete" parameterType="user">
+        delete from person where id = #{id}
+    </delete>
+    <!-- 查询所有信息 -->
+    <select id="selectAll"
+            resultType="user">
+        select * from person
+    </select>
+
+<!--    根据id查询谢谢-->
+    <select id="selectById"
+            resultType="user">
+        select  * from person where id = #{id}
+    </select>
+
+    <!--    根据Name查询谢谢-->
+    <select id="selectByName"
+            resultType="user">
+        select  * from person where name = #{name}
+    </select>
+
+
+</mapper>

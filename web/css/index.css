@@ -1,0 +1,162 @@
+.br{
+    display: none;
+}
+
+body{
+
+}
+.head{
+    width: 100%;
+    height: 50px;
+    background: cadetblue;
+}
+.submit{
+    width: 100px;
+    height: 35px;
+    /*border-radius: 10px;*/
+    font-size: 14px;
+}
+
+.submit:hover{
+    background: border-box;
+}
+.form{
+    margin-right: 12px;
+    margin-top: -42px;
+    float: right;
+    position: absolute;
+    margin-left: 92.4%;
+}
+.head a{
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+}
+
+.head button{
+    float: right;
+    margin-right: 150px;
+    margin-top: 9px;
+    width: 100px;
+    height: 35px;
+    /*border-radius: 10px;*/
+}
+.head button:hover{
+    background: border-box;
+}
+.userid{
+    display: none;
+}
+form input{
+  display: block;
+    height: 35px;
+    font-size: 25px;
+    width: 250px;
+    /*border-radius: 25px;*/
+    margin-bottom: 50px;
+
+}
+form a{
+    float: left;
+    font-size: 25px;
+    margin-left: 30%;
+}
+.upload{
+    margin-top: 5%;
+    margin-left: -9%;
+    height: 400px;
+}
+#fileupload{
+    width: 100%;
+    height: 95%;
+    z-index: 100;
+}
+
+#filedownload{
+    width: 99%;
+    height: 95%;
+    z-index: 100;
+}
+.close{
+    width: 65px;
+    height: 58px;
+    float: right;
+    font-size: 45px;
+    margin-top: -11%;
+    text-align: center;
+    margin-right: -6px;
+}
+.close:hover{
+    background-color:#fffff4;
+    cursor: default;
+}
+#iframe{
+    width: 595px;
+    height: 470px;
+}
+.success{
+    display: block;
+    height: 35px;
+    font-size: 25px;
+    width: 250px;
+    margin-left: 28%;
+    margin-top: 30%;
+}
+
+.png{
+    width: 100%;
+}
+.bookname{
+    text-align: center;
+}
+.author{
+    text-align: center;
+}
+.book{
+    width: 15%;
+    height: 250px;
+    float: left;
+    margin: 2%;
+    box-shadow: 10px 10px 5px #888888;
+}
+.book:hover{
+    background-color: #5f9ea0;
+    width: 16%;
+    margin: 1.5%;
+    /*margin-top: 2%;*/
+    margin-bottom: 2.5%;
+}
+
+.bookadd{
+    width: 12%;
+    height: 250px;
+    float: left;
+    margin: 2%;
+}
+.bookadd:hover{
+    width: 13%;
+    margin: 1.5%;
+    /*margin-top: 2%;*/
+    margin-bottom: 2.5%;
+}
+.file{
+    position: absolute;
+    display: none;
+}
+
+.imgadd{
+    width: 100%;
+    border-radius: 152px;
+}
+.uploadfiles{
+    position: absolute;
+    margin-top: -2.1%;
+    float: right;
+    width: 100px;
+    height: 35px;
+    margin-left: 1%;
+}
+.search{
+    width: 99.6%;
+    height: 96.7%;
+}

@@ -1,0 +1,58 @@
+.search {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+    width: 50%;
+    margin-left: 10%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.searchtype{
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.searchsure{
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+.books{
+    margin-top: 1%;
+}
+.book{
+    width: 28%;
+    float: left;
+    margin: 2%;
+    box-shadow: 10px 10px 5px #888888;
+}
+.png{
+    width: 100%;
+}
+.bookname{
+    text-align: center;
+}
+.author{
+    text-align: center;
+}
+
+#chose{
+    width: 99%;
+    height: 95%;
+    z-index: 100;
+}
+
+.searchdiv{
+
+}
+
+.searchchose{
+
+}

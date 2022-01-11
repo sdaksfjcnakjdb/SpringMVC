@@ -1,0 +1,78 @@
+body{
+    background-image: url("../img/background.png");
+    background-size:100% 100%;
+}
+.submit{
+    width: 150px;
+    height: 75px;
+    background: #40a8e5;
+    border-radius: 45px;
+    position: absolute;
+    margin-top: 350px;
+    margin-left: 175px;
+}
+
+.load{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #f6f9f9;
+    border-radius: 75px;
+    margin-left: 36%;
+    margin-top: 14%;
+    position: absolute;
+}
+.register{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #f6f9f9;
+    border-radius: 75px;
+    margin-left: 36%;
+    margin-top: 14%;
+}
+.toregis{
+    width: 500px;
+    margin-left: 180px;
+    margin-top: 450px;
+    position: absolute;
+}
+.toregis:hover {
+    color: #12b4d9;
+    cursor: default;
+}
+table{
+    margin: auto;
+    padding-top: 20%;
+}
+.name{
+    height: 200px;
+}
+.regise{
+    height: 100px;
+}
+tbody tr{
+    font-size: x-large;
+}
+.tips{
+    margin-left: 42%;
+    color: white;
+}
+
+input{
+    height: 35px;
+    font-size: 25px;
+    border-radius: 25px;
+    width: 250px;
+}
+
+.findpassword{
+    width: 500px;
+    margin-left: 180px;
+    margin-top: 470px;
+    position: absolute;
+}
+.findpassword:hover {
+    color: #12b4d9;
+    cursor: default;
+}

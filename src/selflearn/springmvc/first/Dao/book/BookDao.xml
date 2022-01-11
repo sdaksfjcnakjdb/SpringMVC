@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="selflearn.springmvc.first.Dao.book.BookDao">
+
+
+
+    <!-- 添加一个信息 -->
+    <insert id="add" parameterType="book">
+        insert into book
+            (name,img,fileUrl,author,pont,loadtime,loadperson)
+        values(#{name},#{img},#{fileUrl},#{author},0,now(),#{loadperson})
+    </insert>
+
+
+    <!--    修改信息-->
+    <update id="update" parameterType="book">
+        update book set
+                          name = #{name},
+                          img = #{img},
+                          fileUrl = #{fileUrl},
+                          author = #{author}
+        where id = #{id}
+    </update>
+
+    <!--    下载量+1-->
+    <update id="pontchange" parameterType="book">
+        update book set
+                       pont = pont +1
+        where id = #{id}
+    </update>
+
+    <!--删除信息-->
+<!--    动态sql语句-->
+<!--    支持id、书名、作者-->
+    <delete id="delete" parameterType="book">
+        delete from book
+        <where>
+        <if test="id != 0">
+             id = #{id}
+        </if>
+        <if test="name != null">
+            name = #{name}
+        </if>
+        <if test="author != null">
+            author = #{author}
+        </if>
+        <if test="loadperson != null">
+            loadperson = #{loadperson}
+        </if>
+        </where>
+    </delete>
+    <!-- 查询所有信息 -->
+    <select id="selectAll"
+            resultType="book">
+        select book.* from book
+        LEFT JOIN person_book ON book.id = person_book.bookid
+        <where>
+            <if test = "id != 0">
+                personid = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!--    根据id查询谢谢-->
+    <select id="selectById"
+            resultType="book">
+        select  * from book where id = #{id}
+    </select>
+
+    <!--    根据Name查询谢谢-->
+    <select id="selectByName"
+            resultType="book">
+        select  * from book where name = #{name}
+    </select>
+
+
+    <!--    根据Author查询谢谢-->
+    <select id="selectByauthor"
+            resultType="book">
+        select  * from book where author = #{author}
+    </select>
+
+
+
+    <!--    动态sql语句-->
+<!--    支持查询作者、书名、id-->
+    <select id="selectBy"
+            resultType="book">
+        select  * from book
+        <where>
+            <if test="name != null">
+                name = #{name}
+            </if>
+            <if test="author != null">
+                AND author like #{author}
+            </if>
+            <if test="id != 0">
+                AND id like #{id}
+            </if>
+            <if test="loadperson != 0">
+                AND id = #{loadperson}
+            </if>
+        </where>
+    </select>
+
+</mapper>

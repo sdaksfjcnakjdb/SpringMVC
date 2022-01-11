@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+        <setting name = "cacheEnabled" value = "true" />
+    </settings>
+
+    <typeAliases>
+        <!--
+            alias：定义的别名
+            type：指定要起别名的类型全类名
+            默认别名就是类名小写
+        -->
+        <typeAlias alias="user" type="selflearn.springmvc.first.bean.User"/>
+        <typeAlias alias="book" type="selflearn.springmvc.first.bean.Book"/>
+
+    </typeAliases>
+
+    <!-- 将mapper文件加入到配置文件中 -->
+    <mappers>
+        <mapper resource="selflearn/springmvc/first/Dao/user/UserDao.xml" />
+        <mapper resource="selflearn/springmvc/first/Dao/book/BookDao.xml" />
+    </mappers>
+</configuration>
