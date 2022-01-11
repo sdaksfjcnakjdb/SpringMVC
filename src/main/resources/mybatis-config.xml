@@ -15,6 +15,7 @@
         -->
         <typeAlias alias="user" type="selflearn.springmvc.first.bean.User"/>
         <typeAlias alias="book" type="selflearn.springmvc.first.bean.Book"/>
+        <typeAlias alias="userbook" type="selflearn.springmvc.first.bean.UserBook"/>
 
     </typeAliases>
 
