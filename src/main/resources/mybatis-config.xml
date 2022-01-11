@@ -23,5 +23,6 @@
     <mappers>
         <mapper resource="selflearn/springmvc/first/Dao/user/UserDao.xml" />
         <mapper resource="selflearn/springmvc/first/Dao/book/BookDao.xml" />
+        <mapper resource="selflearn/springmvc/first/Dao/userbook/UserBookDao.xml" />
     </mappers>
 </configuration>

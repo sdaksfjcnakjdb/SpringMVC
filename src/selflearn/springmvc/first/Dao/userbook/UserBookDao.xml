@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="selflearn.springmvc.first.Dao.userbook.UserBookDao">
+    <!-- ?????? -->
+    <insert id="add" parameterType="userbook">
+        insert into person_book
+            (personid,bookid,creattime)
+        values(#{personid},#{bookid},now())
+    </insert>
+
+    <delete id="delete" parameterType="userbook">
+        delete from person_book where id = #{id}
+    </delete>
+
+
+</mapper>

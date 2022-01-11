@@ -32,6 +32,12 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <bean id="userbookDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="selflearn.springmvc.first.Dao.userbook.UserBookDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
     <bean id="user" class="selflearn.springmvc.first.bean.User"></bean>
     <bean id="book" class="selflearn.springmvc.first.bean.Book" ></bean>
+    <bean id="userbook" class="selflearn.springmvc.first.bean.UserBook" ></bean>
 </beans>

@@ -6,8 +6,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import selflearn.springmvc.first.Dao.book.BookDao;
+import selflearn.springmvc.first.Dao.userbook.UserBookDao;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
+import selflearn.springmvc.first.bean.UserBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +97,16 @@ public class Bookservice {
     }
 
 
+
+    @Test
+    public void  test(){
+        context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
+        UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
+        UserBook userBook = (UserBook)context.getBean ("userbook");
+        userBook.setBookid (63);
+        userBook.setPersonid (1);
+        userbookDao.add (userBook);
+    }
     
 
     
