@@ -41,13 +41,13 @@
              id = #{id}
         </if>
         <if test="name != null">
-            name = #{name}
+            and name = #{name}
         </if>
         <if test="author != null">
-            author = #{author}
+            and author = #{author}
         </if>
         <if test="loadperson != null">
-            loadperson = #{loadperson}
+            and loadperson = #{loadperson}
         </if>
         </where>
     </delete>

@@ -14,9 +14,10 @@
 </head>
 <body>
 <div class="searchchose">
-    <form action="down.action" method="post" enctype="multipart/form-data">
-        <input class = "bookname" name = "bookname" type = "String"  style="display: none">
+    <form action="search.action" method="post" enctype="multipart/form-data">
+        <input class = "personid" name = "personid" type = "String"  style="display: none">
         <input class = "bookid" name = "bookid" type = "String"  style="display: none">
+        <input class = "bookname" name = "bookname" type = "String"  style="display: none">
         <input type="submit" value="添加"style="
                 width: 150px;
                 height: 50px;
@@ -27,8 +28,9 @@
 </div>
 </body>
 <script>
-    document.getElementsByClassName("bookname")[0].setAttribute("value","tesst");
+    document.getElementsByClassName("personid")[0].setAttribute("value","${sessionScope.user.id}");
     document.getElementsByClassName("bookid")[0].setAttribute("value","${book.id}");
+    document.getElementsByClassName("bookname")[0].setAttribute("value","${book.name}");
     var book =document.getElementsByClassName("searchchose")[0];
     var img = document.createElement("img");
     var bookname = document.createElement("p");

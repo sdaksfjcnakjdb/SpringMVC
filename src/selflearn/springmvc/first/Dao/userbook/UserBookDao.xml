@@ -15,5 +15,19 @@
         delete from person_book where id = #{id}
     </delete>
 
+    <select id="selectby" parameterType="userbook" resultType="userbook">
+        select * from person_book
+        <where>
+            <if test="bookid!=0">
+                bookid = #{bookid}
+            </if>
+            <if test="personid!=0">
+                and personid = #{personid}
+            </if>
+            <if test="creattime != null">
+                and creattime = #{creattime}
+            </if>
+        </where>
+    </select>
 
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
+import selflearn.springmvc.first.bean.UserBook;
 import selflearn.springmvc.first.service.Book.Bookservice;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -295,6 +296,26 @@ public class LoadController {
         Bookservice.pontchange(Integer.parseInt (bookid));
         return mv;
     }
+
+    /**
+     * 订阅书籍功能
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/search")
+    public ModelAndView  search (HttpServletRequest request, HttpServletResponse response, UserBook userBook, String bookname, Model model) throws Exception{
+        ModelAndView mv = new ModelAndView("bookload/success");
+        if(Bookservice.search (userBook)){// 该用户已订阅该书籍
+            model.addAttribute ("name","您已订阅该书籍");
+            return mv;
+        }else {
+            Bookservice.addbook(userBook);
+            model.addAttribute ("name", "书籍:《" + bookname + "》订阅成功，回到主页面刷新即可查看");
+            return mv;
+        }
+    }
+
 
 
 }

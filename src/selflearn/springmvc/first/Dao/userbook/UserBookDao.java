@@ -1,8 +1,9 @@
 package selflearn.springmvc.first.Dao.userbook;
 
-import org.junit.Test;
 import org.springframework.stereotype.Repository;
 import selflearn.springmvc.first.bean.UserBook;
+
+import java.util.List;
 
 @Repository
 public interface UserBookDao {
@@ -10,4 +11,5 @@ public interface UserBookDao {
 
     public void delete(UserBook userBook);
 
+    public List<UserBook> selectby(UserBook userBook);
 }

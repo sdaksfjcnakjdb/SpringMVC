@@ -104,14 +104,26 @@ public class Bookservice {
         userbookDao.add (userBook);
     }
 
+    //查询书籍是否在用户仓库中
+    public static boolean search(UserBook userBook){
+        context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
+        UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
+        List<UserBook> bookList = userbookDao.selectby (userBook);
+        if (bookList.size () == 0){
+            return false;
+        }
+        return true;
+    }
+
+
     @Test
     public void  test(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
         UserBook userBook = (UserBook)context.getBean ("userbook");
         userBook.setBookid (63);
-        userBook.setPersonid (1);
-        userbookDao.add (userBook);
+        userBook.setPersonid (12);
+        List<UserBook> bookList = userbookDao.selectby (userBook);
     }
     
 
