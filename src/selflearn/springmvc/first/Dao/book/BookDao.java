@@ -10,7 +10,7 @@ import java.util.List;
 public interface BookDao {
     public ArrayList<Book> selectAll(User user);
 
-    public void  add(Book bean);
+    public int  add(Book bean);
 
     public void update(Book bean);
 

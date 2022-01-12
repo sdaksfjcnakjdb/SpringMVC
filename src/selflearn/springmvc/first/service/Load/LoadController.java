@@ -253,10 +253,11 @@ public class LoadController {
         book1.setImg (imgnewFileName);
         book1.setFileUrl (booknewFileName);
         book1.setLoadperson (userid);
-        Bookservice.insert(book1);
 
-//        String fileUrl = date.get(Calendar.YEAR) + "/" + (date.get(Calendar.MONTH)+1) + "/" + newFileName;
-//        mv.addObject("path", fileUrl);
+        UserBook userBook = Bookservice.getuserbook ();
+        userBook.setPersonid (userid);
+        userBook.setBookid (Bookservice.insert(book1));
+        Bookservice.addbook (userBook);
         model.addAttribute ("name","书籍:《"+book+"》上传完成");
         return  mv;
     }

@@ -7,7 +7,7 @@
 
 
     <!-- 添加一个信息 -->
-    <insert id="add" parameterType="book">
+    <insert id="add" parameterType="book" useGeneratedKeys="true" keyProperty="id">
         insert into book
             (name,img,fileUrl,author,pont,loadtime,loadperson)
         values(#{name},#{img},#{fileUrl},#{author},0,now(),#{loadperson})

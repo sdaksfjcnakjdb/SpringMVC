@@ -32,11 +32,17 @@ public class Bookservice {
         return  (Book) context.getBean ("book");
     }
 
+    //返回userbook实例
+    public static UserBook getuserbook(){
+        context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
+        return  (UserBook) context.getBean ("userbook");
+    }
     //新增书籍
-    public static void insert(Book book){
+    public static int insert(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         bookDao.add (book);
+        return book.getId ();
     }
 
     //修改书籍
@@ -138,6 +144,7 @@ public class Bookservice {
         book.setFileUrl ("文件路径");
         book.setImg ("图谱路径");
         bookDao.add (book);
+
     }
     @Test
     public void updateT(){
