@@ -8,10 +8,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import selflearn.springmvc.first.Dao.user.UserDao;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
+import selflearn.springmvc.first.mapper.load.LoadInterService;
 
 import java.util.List;
 
-public class Loadservice {
+public class Loadservice implements LoadInterService {
     public static ApplicationContext context;
 
     @Before
@@ -24,7 +25,7 @@ public class Loadservice {
         System.out.println ("CRUD");
     }
 
-    public static List<User> selectAll(){
+    public List<User> selectAll(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserDao userDao = (UserDao) context.getBean ("userDao");
         List<User> userList = userDao.selectAll ();
@@ -32,14 +33,14 @@ public class Loadservice {
     }
 
     //返回user实例
-    public static User getUser(){
+    public  User getUser(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         return  (User) context.getBean ("user");
     }
 
 
     //查询
-    public static User selectById(User user){
+    public User selectById(User user){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserDao userDao = (UserDao) context.getBean ("userDao");
         User user1 = userDao.selectByName (user);
@@ -47,7 +48,7 @@ public class Loadservice {
     }
 
 
-    public static User selectByName(User user){
+    public  User selectByName(User user){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserDao userDao = (UserDao) context.getBean ("userDao");
         User user1 = userDao.selectByName (user);
@@ -55,14 +56,14 @@ public class Loadservice {
     }
 
     //插入
-    public static void insert(User user){
+    public  void insert(User user){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserDao userDao = (UserDao) context.getBean ("userDao");
         userDao.add(user);
     }
 
     //修改密码
-    public static void update(User user){
+    public  void update(User user){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserDao userDao = (UserDao) context.getBean ("userDao");
         userDao.update (user);

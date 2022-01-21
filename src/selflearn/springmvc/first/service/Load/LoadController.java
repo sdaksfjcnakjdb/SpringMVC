@@ -4,7 +4,10 @@ import net.sf.json.JSONArray;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.bean.UserBook;
+import selflearn.springmvc.first.mapper.load.LoadInterService;
 import selflearn.springmvc.first.service.Book.Bookservice;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,24 +25,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 @SessionAttributes(value = {"user"})
 @Controller
 @RequestMapping("/hi")
-public class LoadController {
-
+@Transactional(rollbackFor = { Exception.class })
+public class LoadController{
+    public static ApplicationContext context=new ClassPathXmlApplicationContext("selflearn/springmvc/first/mapper/spring.xml");;
     private static final Log logger = LogFactory.getLog (LoadController.class);
+    public static Loadservice loadservice = (Loadservice) context.getBean("loadservice");
+    public static Bookservice bookservice = (Bookservice) context.getBean("bookservice");
 
 
-@Test
-    public void test(){
-    User user1 = new User ();
-    user1.setId (1);
-    ArrayList<Book> listbook = Bookservice.selectAll (user1);
-    JSONArray bookJsonArray = JSONArray.fromObject (listbook);
-    System.out.println (bookJsonArray);
-}
     //登陆服务
     @RequestMapping(value = "/getFrom", method = RequestMethod.POST)
     public String test(
@@ -46,11 +44,11 @@ public class LoadController {
             Model model,
             HttpServletResponse response) throws Exception {
         logger.info (user);
-        User user1 = Loadservice.selectByName (user);
+        User user1 = loadservice.selectByName (user);
         if(user1 != null) {
             if (user1.getPassword ().equals (user.getPassword ())) {//跳转到主页面
                 model.addAttribute ("user", user1);
-                ArrayList<Book> listbook = Bookservice.selectAll (user1);
+                ArrayList<Book> listbook = bookservice.selectAll (user1);
                 JSONArray bookJsonArray = JSONArray.fromObject (listbook);
                 model.addAttribute ("listbook",bookJsonArray);
                 return "index";
@@ -79,11 +77,11 @@ public class LoadController {
             @ModelAttribute("userload") User user,
             Model model) throws Exception{
         logger.info (user);
-        if(Loadservice.selectByName (user) != null){
+        if(loadservice.selectByName (user) != null){
             model.addAttribute ("tips","已存在账号，请换一个账号注册");
             return "userload/register";
         }else{
-            Loadservice.insert (user);
+            loadservice.insert (user);
             model.addAttribute ("tips","注册成功！，请输入账号密码登陆");
             return "userload/load";
         }
@@ -95,10 +93,10 @@ public class LoadController {
             Model model,
             @ModelAttribute("userload")User user
     ) {
-        User user1 = Loadservice.selectByName (user);
+        User user1 = loadservice.selectByName (user);
         if(user1.getName ().equals (user.getName ()) && user.getPhone () == user1.getPhone ()){//账号密码正确
             user.setId (user1.getId ());
-            Loadservice.update (user);
+            loadservice.update (user);
             model.addAttribute ("tips","密码修改成功！请输入账号密码登陆");
             return "userload/load";
         }else {
@@ -106,10 +104,6 @@ public class LoadController {
             return "userload/repassword";
         }
     }
-
-
-
-
 
 
     //跳转到注册页面
@@ -170,8 +164,8 @@ public class LoadController {
     ){
         model.addAttribute ("name", "书籍搜索");
         model.addAttribute ("user",user);
-        User user1 =  Loadservice.getUser ();
-        ArrayList<Book> listbook = Bookservice.selectAll (user1);
+        User user1 =  loadservice.getUser();
+        ArrayList<Book> listbook = bookservice.selectAll (user1);
         JSONArray bookJsonArray = JSONArray.fromObject (listbook);
         model.addAttribute ("listbook",bookJsonArray);
         return "search/search";
@@ -194,7 +188,7 @@ public class LoadController {
             @ModelAttribute("userid")int userid,
             HttpServletRequest request,
             Model model
-    ) throws IOException {
+    ) throws Exception {
         ModelAndView mv = new ModelAndView("bookload/success");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS");
         String res = sdf.format(new Date ());
@@ -247,17 +241,16 @@ public class LoadController {
 
 
         //写入数据库
-        Book book1 = Bookservice.getBook ();
+        Book book1 = bookservice.getBook ();
         book1.setName (book);
         book1.setAuthor (author);
         book1.setImg (imgnewFileName);
         book1.setFileUrl (booknewFileName);
         book1.setLoadperson (userid);
 
-        UserBook userBook = Bookservice.getuserbook ();
+        UserBook userBook = bookservice.getuserbook ();
         userBook.setPersonid (userid);
-        userBook.setBookid (Bookservice.insert(book1));
-        Bookservice.addbook (userBook);
+        userBook.setBookid (bookservice.insert(book1,userBook));
         model.addAttribute ("name","书籍:《"+book+"》上传完成");
         return  mv;
     }
@@ -294,7 +287,7 @@ public class LoadController {
         out.close();
         model.addAttribute ("name","书籍:《"+bookname+"》下载完成");
         System.out.println ("id:"+bookid);
-        Bookservice.pontchange(Integer.parseInt (bookid));
+        bookservice.pontchange(Integer.parseInt (bookid));
         return mv;
     }
 
@@ -307,16 +300,15 @@ public class LoadController {
     @RequestMapping("/search")
     public ModelAndView  search (HttpServletRequest request, HttpServletResponse response, UserBook userBook, String bookname, Model model) throws Exception{
         ModelAndView mv = new ModelAndView("bookload/success");
-        if(Bookservice.search (userBook)){// 该用户已订阅该书籍
+        if(bookservice.search (userBook)){// 该用户已订阅该书籍
             model.addAttribute ("name","您已订阅该书籍");
             return mv;
         }else {
-            Bookservice.addbook(userBook);
+            bookservice.addbook(userBook);
             model.addAttribute ("name", "书籍:《" + bookname + "》订阅成功，回到主页面刷新即可查看");
             return mv;
         }
     }
-
 
 
 }

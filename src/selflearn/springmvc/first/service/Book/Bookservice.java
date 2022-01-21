@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import selflearn.springmvc.first.Dao.book.BookDao;
 import selflearn.springmvc.first.Dao.userbook.UserBookDao;
 import selflearn.springmvc.first.bean.Book;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bookservice {
-    public static ApplicationContext context;
+    public  ApplicationContext context;
     @Before
     public void before(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
@@ -27,33 +28,38 @@ public class Bookservice {
 
 
     //返回book实例
-    public static Book getBook(){
+    public  Book getBook(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         return  (Book) context.getBean ("book");
     }
 
     //返回userbook实例
-    public static UserBook getuserbook(){
+    public  UserBook getuserbook(){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         return  (UserBook) context.getBean ("userbook");
     }
-    //新增书籍
-    public static int insert(Book book){
+    //新增书籍,加入订阅
+    @Transactional
+    public int insert(Book book, UserBook userBook) throws Exception {
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         bookDao.add (book);
+        if (true) {
+            throw new Exception();
+        }
+        addbook(userBook);
         return book.getId ();
-    }
+        }
 
     //修改书籍
-    public static void update(Book book){
+    public  void update(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         bookDao.update(book);
     }
 
     //查找所有书籍
-    public static ArrayList<Book> selectAll(User user){
+    public  ArrayList<Book> selectAll(User user){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         ArrayList<Book> bookList =  bookDao.selectAll (user);
@@ -61,14 +67,14 @@ public class Bookservice {
     }
 
     //依据书名查找书籍
-    public static List<Book> selectByname(Book book){
+    public  List<Book> selectByname(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         List<Book>  bookList = bookDao.selectByName (book);
         return bookList;
     }
     //依据作者查找书籍
-    public static List<Book> selectByauthor(Book book){
+    public  List<Book> selectByauthor(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         List<Book>  bookList = bookDao.selectByauthor (book);
@@ -77,7 +83,7 @@ public class Bookservice {
 
     
     //动态sql查询书籍
-    public static List<Book> selectBy(Book book){
+    public  List<Book> selectBy(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         List<Book>  bookList = bookDao.selectBy (book);
@@ -87,14 +93,14 @@ public class Bookservice {
 
 
     //动态sql删除书籍
-    public static void delete(Book book){
+    public  void delete(Book book){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         bookDao.delete (book);
     }
 
     //点击量记录
-    public static void pontchange(int id){
+    public  void pontchange(int id){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         Book book = (Book)context.getBean ("book");
@@ -104,14 +110,14 @@ public class Bookservice {
 
 
     //订阅书籍
-    public static void  addbook(UserBook userBook){
+    public  void  addbook(UserBook userBook){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
         userbookDao.add (userBook);
     }
 
     //查询书籍是否在用户仓库中
-    public static boolean search(UserBook userBook){
+    public  boolean search(UserBook userBook){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         UserBookDao userbookDao = (UserBookDao) context.getBean ("userbookDao");
         List<UserBook> bookList = userbookDao.selectby (userBook);
