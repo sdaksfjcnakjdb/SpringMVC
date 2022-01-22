@@ -99,8 +99,19 @@
         var length =${listbook.size()};
         const list = ${listbook};
         for (let i = 0; i < length; i++) {
-            if (type == 0 && list[i].name==input) {
+            if (input == ''){
                 books = searchadd(list,books,i);
+            }
+            else {
+                if (type == 0 && list[i].name == input) {
+                    books = searchadd(list, books, i);
+                }
+                if (type == 1 && list[i].author == input) {
+                    books = searchadd(list, books, i);
+                }
+                if (type == 2 && list[i].loadperson == input) {
+                    books = searchadd(list, books, i);
+                }
             }
         }
     }
