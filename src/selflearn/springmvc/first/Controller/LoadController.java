@@ -1,9 +1,8 @@
-package selflearn.springmvc.first.service.Load;
+package selflearn.springmvc.first.Controller;
 
 import net.sf.json.JSONArray;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.bean.UserBook;
-import selflearn.springmvc.first.mapper.load.LoadInterService;
-import selflearn.springmvc.first.service.Book.Bookservice;
+import selflearn.springmvc.first.serviceimpl.Bookservice;
+import selflearn.springmvc.first.serviceimpl.Loadservice;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -29,13 +29,12 @@ import java.util.Date;
 @SessionAttributes(value = {"user"})
 @Controller
 @RequestMapping("/hi")
-@Transactional(rollbackFor = { Exception.class })
+@Transactional
 public class LoadController{
     public static ApplicationContext context=new ClassPathXmlApplicationContext("selflearn/springmvc/first/mapper/spring.xml");;
     private static final Log logger = LogFactory.getLog (LoadController.class);
     public static Loadservice loadservice = (Loadservice) context.getBean("loadservice");
     public static Bookservice bookservice = (Bookservice) context.getBean("bookservice");
-
 
     //登陆服务
     @RequestMapping(value = "/getFrom", method = RequestMethod.POST)

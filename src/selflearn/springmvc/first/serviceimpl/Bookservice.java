@@ -1,10 +1,11 @@
-package selflearn.springmvc.first.service.Book;
+package selflearn.springmvc.first.serviceimpl;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import selflearn.springmvc.first.Dao.book.BookDao;
 import selflearn.springmvc.first.Dao.userbook.UserBookDao;
@@ -15,6 +16,9 @@ import selflearn.springmvc.first.bean.UserBook;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Transactional(rollbackFor = Exception.class)
+@Service
 public class Bookservice {
     public  ApplicationContext context;
     @Before
@@ -39,17 +43,16 @@ public class Bookservice {
         return  (UserBook) context.getBean ("userbook");
     }
     //新增书籍,加入订阅
-    @Transactional
-    public int insert(Book book, UserBook userBook) throws Exception {
+    public int insert(Book book, UserBook userBook){
         context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
         BookDao bookDao = (BookDao) context.getBean ("bookDao");
         bookDao.add (book);
-        if (true) {
-            throw new Exception();
-        }
+        //人为制造错误
+        System.out.println(1/0);
         addbook(userBook);
         return book.getId ();
         }
+
 
     //修改书籍
     public  void update(Book book){

@@ -1,4 +1,4 @@
-package selflearn.springmvc.first.service.File;
+package selflearn.springmvc.first.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

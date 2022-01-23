@@ -1,4 +1,4 @@
-package selflearn.springmvc.first.service.Load;
+package selflearn.springmvc.first.serviceimpl;
 
 import org.junit.After;
 import org.junit.Before;
@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import selflearn.springmvc.first.Dao.user.UserDao;
-import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.mapper.load.LoadInterService;
 
