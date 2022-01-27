@@ -1,11 +1,11 @@
-package selflearn.springmvc.first.Dao.userbook;
+package selflearn.springmvc.first.Dao;
 
 import org.springframework.stereotype.Repository;
 import selflearn.springmvc.first.bean.UserBook;
 
 import java.util.List;
 
-@Repository
+@Repository("UserBookDao")
 public interface UserBookDao {
     public void add(UserBook userBook);
 

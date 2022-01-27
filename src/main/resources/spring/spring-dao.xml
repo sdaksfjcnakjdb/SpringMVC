@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 配置整合mybatis过程 -->
+    <!-- 1.配置数据库相关参数properties的属性：${url} -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
+    <!-- 2.数据库连接池 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- 配置连接池属性 -->
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="jdbc:mysql://localhost:3306/mysql?characterEncoding=utf8&amp;serverTimezone=UTC&amp;serverTimezone=Asia/Shanghai" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+
+<!--        &lt;!&ndash; c3p0连接池的私有属性 &ndash;&gt;-->
+<!--        <property name="maxPoolSize" value="30" />-->
+<!--        <property name="minPoolSize" value="10" />-->
+<!--        &lt;!&ndash; 关闭连接后不自动commit &ndash;&gt;-->
+<!--        <property name="autoCommitOnClose" value="false" />-->
+<!--        &lt;!&ndash; 获取连接超时时间 &ndash;&gt;-->
+<!--        <property name="checkoutTimeout" value="10000" />-->
+<!--        &lt;!&ndash; 当获取连接失败重试次数 &ndash;&gt;-->
+<!--        <property name="acquireRetryAttempts" value="2" />-->
+
+    </bean>
+
+    <!-- 3.配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <!-- 扫描entity包 使用别名 -->
+        <property name="typeAliasesPackage" value="selflearn.springmvc.first.bean" />
+        <!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
+    </bean>
+
+
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入sqlSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!-- 给出需要扫描Dao接口包 -->
+        <property name="basePackage" value="selflearn.springmvc.first.Dao" />
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true" />
+
+
+<!--    注解扫描-->
+    <context:component-scan base-package="selflearn.springmvc.first.bean">
+    </context:component-scan>
+
+    <context:component-scan base-package="selflearn.springmvc.first.serviceimpl">
+    </context:component-scan>
+
+<!--    <bean id="user" class="selflearn.springmvc.first.bean.User"></bean>-->
+<!--    <bean id="book" class="selflearn.springmvc.first.bean.Book" ></bean>-->
+<!--    <bean id="userbook" class="selflearn.springmvc.first.bean.UserBook" ></bean>-->
+<!--    <bean id="loadservice" class="selflearn.springmvc.first.serviceimpl.Loadservice" autowire="byType"></bean>-->
+<!--    <bean id="bookservice" class="selflearn.springmvc.first.serviceimpl.Bookservice" autowire="byType"></bean>-->
+
+</beans>

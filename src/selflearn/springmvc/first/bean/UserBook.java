@@ -1,22 +1,20 @@
 package selflearn.springmvc.first.bean;
 
-import javax.xml.crypto.Data;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
+@Component
 public class UserBook {
     private int id;
     private int personid;
     private int bookid;
     private Data creattime;
 
-    public UserBook(int id, int personid, int bookid, Data creattime) {
-        this.id = id;
-        this.personid = personid;
-        this.bookid = bookid;
-        this.creattime = creattime;
-    }
-
     public UserBook() {
     }
+
+
 
     public int getId() {
         return id;

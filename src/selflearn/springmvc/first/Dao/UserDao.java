@@ -1,11 +1,11 @@
-package selflearn.springmvc.first.Dao.user;
+package selflearn.springmvc.first.Dao;
 
 import org.springframework.stereotype.Repository;
 import selflearn.springmvc.first.bean.User;
 
 import java.util.List;
 
-@Repository
+@Repository("UserDao")
 public interface UserDao {
     public List<User> selectAll();
 

@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -29,9 +30,9 @@ import java.util.Date;
 @SessionAttributes(value = {"user"})
 @Controller
 @RequestMapping("/hi")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 public class LoadController{
-    public static ApplicationContext context=new ClassPathXmlApplicationContext("selflearn/springmvc/first/mapper/spring.xml");;
+    public static ApplicationContext context=new ClassPathXmlApplicationContext("spring/spring-dao.xml");;
     private static final Log logger = LogFactory.getLog (LoadController.class);
     public static Loadservice loadservice = (Loadservice) context.getBean("loadservice");
     public static Bookservice bookservice = (Bookservice) context.getBean("bookservice");

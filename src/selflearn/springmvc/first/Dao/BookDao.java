@@ -1,12 +1,14 @@
-package selflearn.springmvc.first.Dao.book;
+package selflearn.springmvc.first.Dao;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import org.springframework.stereotype.Repository;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("BookDao")
 public interface BookDao {
     public ArrayList<Book> selectAll(User user);
 

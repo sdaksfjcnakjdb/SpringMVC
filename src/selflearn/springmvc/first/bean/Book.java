@@ -1,7 +1,10 @@
 package selflearn.springmvc.first.bean;
 
-import java.util.Date;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+@Component
 public class Book {
     private int id;
     private String name;//书名
@@ -13,16 +16,7 @@ public class Book {
     private Date loadtime;//上传时间
 
 
-    public Book(int id, String name, String img, String fileUrl, String author, int pont, int loadperson, Date loadtime) {
-        this.id = id;
-        this.name = name;
-        this.img = img;
-        this.fileUrl = fileUrl;
-        this.author = author;
-        this.pont = pont;
-        this.loadperson = loadperson;
-        this.loadtime = loadtime;
-    }
+
 
     public Date getLoadtime() {
         return loadtime;

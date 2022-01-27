@@ -5,6 +5,14 @@
     <settings>
         <setting name="logImpl" value="LOG4J" />
         <setting name = "cacheEnabled" value = "true" />
+        <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+        <setting name="useGeneratedKeys" value="true" />
+
+        <!-- 使用列别名替换列名 默认:true -->
+        <setting name="useColumnLabel" value="true" />
+
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
 
     <typeAliases>
@@ -15,16 +23,17 @@
         -->
         <typeAlias alias="user" type="selflearn.springmvc.first.bean.User"/>
         <typeAlias alias="book" type="selflearn.springmvc.first.bean.Book"/>
-        <typeAlias alias="userbook" type="selflearn.springmvc.first.bean.UserBook"/>
+        <typeAlias alias="userbook" type="selflearn.springmvc.first.bean.UserBook"
+        />
 
     </typeAliases>
 
 
-    <!-- 将mapper文件加入到配置文件中 -->
-    <mappers>
-        <mapper resource="selflearn/springmvc/first/Dao/user/UserDao.xml" />
-        <mapper resource="selflearn/springmvc/first/Dao/book/BookDao.xml" />
-        <mapper resource="selflearn/springmvc/first/Dao/userbook/UserBookDao.xml" />
-    </mappers>
+<!--     将mapper文件加入到配置文件中-->
+<!--    <mappers>-->
+<!--        <mapper resource="mapper/UserDao.xml" />-->
+<!--        <mapper resource="mapper/BookDao.xml" />-->
+<!--        <mapper resource="mapper/UserBookDao.xml" />-->
+<!--    </mappers>-->
 
 </configuration>

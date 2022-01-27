@@ -1,18 +1,20 @@
 package selflearn.springmvc.first.bean;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
-
-import java.io.Serializable;
+import org.springframework.stereotype.Component;
 import java.util.Date;
 
+
+@Component
 public class User  {
     private String name;
     private String password;
     private int id;
     private Date createtime;
     private int phone;
+
+
+    public User() {
+    }
 
     public Date getCreatetime() {
         return createtime;
