@@ -44,18 +44,6 @@
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="selflearn.springmvc.first.Controller" />
 
-    <!--两个标准配置  -->
-    <!-- 将springmvc不能处理的请求交给tomcat -->
-    <mvc:default-servlet-handler/>
-    <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
-    <mvc:annotation-driven/>
 
 
-    <!--springMVC配置文件springMVC-servlet.xml中只需要扫描@Controller注解的，具体如下：-->
-    <context:component-scan base-package="selflearn.springmvc.first">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-        <!--下面这个是防止事务没起作用，spring.xml的父容器先于Servlet的子容器生效，将Service提前加载了。这里不用再进行加载装配-->
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
-    </context:component-scan>
 </beans>

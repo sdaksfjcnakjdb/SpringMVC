@@ -18,4 +18,10 @@ public interface UserDao {
     public User selectById(User bean);
 
     public User selectByName(User bean);
+
+    public  void  changemoney(User bean);
+
+    public  void  member(User bean);
+
+
 }

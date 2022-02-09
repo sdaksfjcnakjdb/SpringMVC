@@ -69,7 +69,7 @@
     <context:component-scan base-package="selflearn.springmvc.first.bean">
     </context:component-scan>
 
-    <context:component-scan base-package="selflearn.springmvc.first.serviceimpl">
+    <context:component-scan base-package="selflearn.springmvc.first.service">
     </context:component-scan>
 
 <!--    <bean id="user" class="selflearn.springmvc.first.bean.User"></bean>-->

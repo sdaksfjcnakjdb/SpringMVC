@@ -11,7 +11,37 @@ public class User  {
     private int id;
     private Date createtime;
     private int phone;
+    int type;
+    int money;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                ", createtime=" + createtime +
+                ", phone=" + phone +
+                ", type=" + type +
+                ", money=" + money +
+                '}';
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 
     public User() {
     }
@@ -57,14 +87,4 @@ public class User  {
     }
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", id=" + id +
-                ", createtime=" + createtime +
-                ", phone=" + phone +
-                '}';
-    }
 }

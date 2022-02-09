@@ -21,8 +21,9 @@
     <title>主页面</title>
 </head>
     <div class="head">
-        <button onclick="repassword()">修改密码</button>
-        <a >登陆用户：${sessionScope.user.name}</a>
+        <button class="normaluser" onclick="getvip(600,530,'normaluser','normaluser')">普通会员</button>
+        <button onclick="repassword()" style="margin-right: 23px;">修改密码</button>
+        <a >登陆用户：${sessionScope.user.name};金额：${sessionScope.user.money}</a>
     </div>
     <p class="br"> user sessionScope:${sessionScope.user}</p>
     <form action="load" method="post" class="form">
@@ -31,7 +32,7 @@
         </tr>
     </form>
 
-<button onclick="upload('上传书籍文件',600,500,'fileupload','fileupload')" class = "uploadfiles">上传文件</button>
+<button onclick="upload('上传书籍文件',600,550,'fileupload','fileupload')" class = "uploadfiles">上传文件</button>
 <div class="books">
 </div>
 
@@ -42,6 +43,11 @@
  <script>
      Alert("登陆成功！欢迎用户${sessionScope.user.name}进入系统");
      initialization();
+     if (${sessionScope.user.type} == 1){//vip会员
+        document.getElementsByClassName("normaluser")[0].innerHTML = "vip会员";
+         document.getElementsByClassName("normaluser")[0].setAttribute("onclick","showvip(600,530,'vipuser','vipuser')")
+         document.getElementsByClassName("normaluser")[0].setAttribute("class","vipuser")
+     }
      //初始化
      function initialization(){
          var books = document.body.getElementsByClassName("books")[0];
@@ -52,15 +58,19 @@
              var img = document.createElement("img");
              var bookname = document.createElement("p");
              var author = document.createElement("p");
+             var pay = document.createElement("p");
              img.setAttribute("class","png");
              img.setAttribute("src","../upload/img/"+list[i].img);
              bookname.setAttribute("class","bookname");
              author.setAttribute("class","author");
+             pay.setAttribute("class","pay");
              bookname.innerHTML = "《"+list[i].name+"》";
              author.innerHTML = "作者："+list[i].author;
+             pay.innerHTML = "价格："+list[i].pay;
              book.appendChild(img);
              book.appendChild(bookname);
              book.appendChild(author);
+             // book.appendChild(pay);
              book.setAttribute("class","book");
              book.setAttribute("onclick","dowmload('"+
                  list[i].id + "','"+//书籍id
@@ -69,8 +79,9 @@
                  list[i].author+"','"+//书籍作者
                  list[i].fileUrl+"','"+//书籍地址
                  list[i].loadperson+"','"+//上传者
-                 list[i].pont+//下载量
-                 "','下载文件',600,500,'filedownload','filedownload')");
+                 list[i].pont+"','"+//下载量
+                 list[i].pay+//定价
+                 "','下载文件',600,535,'filedownload','filedownload')");
              books.appendChild(book);
          }
          var bookadd = document.createElement("div");

@@ -14,9 +14,16 @@ public class Book {
     private int pont = 0;//下载次数
     private int loadperson;//上传人
     private Date loadtime;//上传时间
+    private int pay;//价值
 
 
+    public int getPay() {
+        return pay;
+    }
 
+    public void setPay(int pay) {
+        this.pay = pay;
+    }
 
     public Date getLoadtime() {
         return loadtime;
@@ -37,6 +44,7 @@ public class Book {
                 ", pont=" + pont +
                 ", loadperson=" + loadperson +
                 ", loadtime=" + loadtime +
+                ", pay=" + pay +
                 '}';
     }
 

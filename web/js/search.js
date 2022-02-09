@@ -1,5 +1,5 @@
 console.log("ceshi1");
-function chose(bookid,name,img,author,fileUrl,loadperson,pont,title, w, h,src,id){
+function chose(bookid,name,img,author,fileUrl,loadperson,pont,pay,title, w, h,src,id){
     var titleheight = "22px"; // 提示窗口标题高度
     var bordercolor = "#666699"; // 提示窗口的边框颜色
     var titlecolor = "#FFFFFF"; // 提示窗口的标题颜色
@@ -75,7 +75,7 @@ function chose(bookid,name,img,author,fileUrl,loadperson,pont,title, w, h,src,id
     var iframe = document.createElement("iframe");
     iframe.setAttribute('id',id);
     iframe.setAttribute("class","searchdiv");
-    iframe.setAttribute('src',src  + '?name='+name+'&img='+img+'&author='+author+'&loadperson='+loadperson+'&pont='+pont+'&fileurl='+fileUrl+'&id='+bookid);
+    iframe.setAttribute('src',src  + '?name='+name+'&img='+img+'&author='+author+'&loadperson='+loadperson+'&pont='+pont+'&fileurl='+fileUrl+'&id='+bookid + '&pay='+pay);
     msgObj.appendChild(iframe);
     msgObj.setAttribute("class","msgObj");
     bgObj.setAttribute("class","bgObj");

@@ -15,9 +15,10 @@
 </head>
 <body>
 <div class="upload">
-    <form action="upload.action" method="post" enctype="multipart/form-data">
+    <form action="upload" method="post" enctype="multipart/form-data">
         <a>书名:</a><input type="String" name="book">
         <a>作者:</a><input type="String" name="author">
+        <a>定价:</a><input type="int" name="pay">
         <a>书籍:</a><input type="file" name="file" width="120px">
         <a>封面:</a><input type="file" name="img" width="120px">
         <input class="userid" name = "userid" type="int" value="${sessionScope.user.id}">

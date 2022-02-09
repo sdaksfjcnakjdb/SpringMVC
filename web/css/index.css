@@ -160,3 +160,18 @@ form a{
     width: 99.6%;
     height: 96.7%;
 }
+
+.vipuser{
+    background-color: #e1ce1b;
+}
+
+#vipuser{
+    width: 100%;
+    height: 95%;
+    z-index: 100;
+}
+#normaluser{
+    width: 100%;
+    height: 95%;
+    z-index: 100;
+}

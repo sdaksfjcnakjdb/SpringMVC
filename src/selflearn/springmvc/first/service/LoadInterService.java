@@ -1,4 +1,4 @@
-package selflearn.springmvc.first.mapper.load;
+package selflearn.springmvc.first.service;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;

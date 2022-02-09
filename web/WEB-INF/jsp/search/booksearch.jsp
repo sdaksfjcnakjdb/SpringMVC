@@ -14,14 +14,14 @@
 </head>
 <body>
 <div class="searchchose">
-    <form action="search.action" method="post" enctype="multipart/form-data">
+    <form action="search" method="post" enctype="multipart/form-data">
         <input class = "personid" name = "personid" type = "String"  style="display: none">
         <input class = "bookid" name = "bookid" type = "String"  style="display: none">
         <input class = "bookname" name = "bookname" type = "String"  style="display: none">
         <input type="submit" value="添加"style="
                 width: 150px;
                 height: 50px;
-                margin: 69%;
+                margin: 75%;
                 margin-left: 73%;
                 position: absolute;">
     </form>
@@ -36,6 +36,7 @@
     var bookname = document.createElement("p");
     var author = document.createElement("p");
     var pont = document.createElement("p");
+    var pay = document.createElement("p");
     img.setAttribute("class","png");
     img.setAttribute("src","../upload/img/"+"${book.img}");
     bookname.setAttribute("class","bookname");
@@ -44,9 +45,13 @@
     author.innerHTML = "作者："+"${book.author}";
     pont.setAttribute("class","pont");
     pont.innerHTML = "下载次数:"+${book.pont};
+    pay.setAttribute("class","pay");
+    pay.innerHTML = "书籍定价:"+${book.pay};
+
     book.appendChild(img);
     book.appendChild(bookname);
     book.appendChild(author);
     book.appendChild(pont);
+    book.appendChild(pay);
 </script>
 </html>

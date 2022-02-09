@@ -15,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.bean.UserBook;
-import selflearn.springmvc.first.serviceimpl.Bookservice;
-import selflearn.springmvc.first.serviceimpl.Loadservice;
+import selflearn.springmvc.first.service.serviceimpl.Bookservice;
+import selflearn.springmvc.first.service.serviceimpl.Loadservice;
+import selflearn.springmvc.first.service.serviceimpl.Walletservice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-@SessionAttributes(value = {"user"})
+@SessionAttributes(value = {"user","wallet"})
 @Controller
 @RequestMapping("/hi")
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
@@ -36,6 +37,7 @@ public class LoadController{
     private static final Log logger = LogFactory.getLog (LoadController.class);
     public static Loadservice loadservice = (Loadservice) context.getBean("loadservice");
     public static Bookservice bookservice = (Bookservice) context.getBean("bookservice");
+    public static Walletservice walletservice = (Walletservice) context.getBean("walletservice");
 
     //登陆服务
     @RequestMapping(value = "/getFrom", method = RequestMethod.POST)
@@ -55,11 +57,6 @@ public class LoadController{
             } else {
                 model.addAttribute ("tips", "账户密码错误！请重新输入！");
                 model.addAttribute ("name", "登陆页面");
-
-//                response.setContentType("text/html;charset=gb2312");
-//                PrintWriter out = response.getWriter();
-//                out.print ("<script \"javascript\">alert('登录成功！');window.location.href='/SpringMVC_war_exploded/WEB-INF/jsp/userload/load'</script>");
-
                 return "userload/load";
             }
         }
@@ -134,6 +131,37 @@ public class LoadController{
         return "bookload/bookupload";
     }
 
+    //跳转到vipuser页面
+    @RequestMapping(value = "/vipuser")
+    public String vipuser(Model model) {
+        model.addAttribute ("name", "vip用户信息");
+        return "vip/vipuser";
+    }
+    //跳转到normaluser页面
+    @RequestMapping(value = "/normaluser")
+    public String normaluser(Model model) {
+        model.addAttribute ("name", "vip充值入口");
+        return "vip/normaluser";
+    }
+
+    //用户充值vip功能
+    @RequestMapping(value = "/getvip")
+    public String getvip(Model model,User user) {
+        User user1 = loadservice.selectById(user);
+        if (user1.getType() == 1){//已为vip用户。
+            model.addAttribute ("message", "您已经是本网站vip用户");
+        }else if (user1.getMoney()<1000){//资金不足
+            model.addAttribute ("message", "您的账户余额不足，请充值！");
+        }else{
+            user1.setMoney(-1000);
+            walletservice.getmember(user1);
+            model.addAttribute ("message", "恭喜您已经成为本网站的vip用户！");
+        }
+        return "vip/alfterup";
+    }
+
+
+
     //跳转到文件下载页面
     @RequestMapping(value = "/filedownload")
     public String filedownload(
@@ -185,6 +213,7 @@ public class LoadController{
             @ModelAttribute("author") String author,
             @RequestParam("file") MultipartFile file,
             @ModelAttribute("img") MultipartFile img,
+            @ModelAttribute("pay") int pay,
             @ModelAttribute("userid")int userid,
             HttpServletRequest request,
             Model model
@@ -247,10 +276,12 @@ public class LoadController{
         book1.setImg (imgnewFileName);
         book1.setFileUrl (booknewFileName);
         book1.setLoadperson (userid);
+        book1.setPay(pay);
 
         UserBook userBook = bookservice.getuserbook ();
         userBook.setPersonid (userid);
-        userBook.setBookid (bookservice.insert(book1,userBook));
+        int bookid = bookservice.insert(book1,userBook);
+        userBook.setBookid (bookid);
         model.addAttribute ("name","书籍:《"+book+"》上传完成");
         return  mv;
     }
@@ -304,7 +335,12 @@ public class LoadController{
             model.addAttribute ("name","您已订阅该书籍");
             return mv;
         }else {
-            bookservice.addbook(userBook);
+
+            Book book = bookservice.getBook();
+            book.setId(userBook.getBookid());
+            Book book1 = bookservice.selectBy(book).get(0);
+
+            walletservice.transaction(book1.getLoadperson(),userBook.getPersonid(),book1.getPay(),userBook);
             model.addAttribute ("name", "书籍:《" + bookname + "》订阅成功，回到主页面刷新即可查看");
             return mv;
         }

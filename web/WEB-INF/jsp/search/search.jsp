@@ -58,8 +58,9 @@
                 list[i].author+"','"+//书籍作者
                 list[i].fileUrl+"','"+//书籍地址
                 list[i].loadperson+"','"+//上传者
-                list[i].pont+//下载量
-                "','加入书库',600,500,'chose','chose')");
+                list[i].pont+"','"+//下载量
+                list[i].pay+//定价
+                "','加入书库',600,535,'chose','chose')");
             books.appendChild(book);
         }
     }
@@ -88,8 +89,9 @@
             list[i].author + "','" +//书籍作者
             list[i].fileUrl + "','" +//书籍地址
             list[i].loadperson + "','" +//上传者
-            list[i].pont +//下载量
-            "','加入书库',600,500,'chose','chose')");
+            list[i].pont+"','"+//下载量
+            list[i].pay+//定价
+            "','加入书库',600,535,'chose','chose')");
         books.appendChild(book);
         return books;
     }

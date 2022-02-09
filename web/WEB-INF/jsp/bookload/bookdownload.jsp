@@ -15,13 +15,13 @@
 </head>
 <body>
 <div class="dowmload">
-    <form action="down.action" method="post" enctype="multipart/form-data">
+    <form action="down" method="post" enctype="multipart/form-data">
         <input class = "bookname" name = "bookname" type = "String"  style="display: none">
         <input class = "bookid" name = "bookid" type = "String"  style="display: none">
         <input type="submit" value="下载"style="
                 width: 150px;
                 height: 50px;
-                margin: 69%;
+                margin: 75%;
                 margin-left: 73%;
                 position: absolute;">
     </form>
@@ -51,6 +51,7 @@
     var bookname = document.createElement("p");
     var author = document.createElement("p");
     var pont = document.createElement("p");
+    var pay = document.createElement("p");
     img.setAttribute("class","png");
     img.setAttribute("src","../upload/img/"+paramMap.img);
     bookname.setAttribute("class","bookname");
@@ -59,9 +60,12 @@
     author.innerHTML = "作者："+paramMap.author;
     pont.setAttribute("class","pont");
     pont.innerHTML = "下载次数:"+paramMap.pont;
+    pay.setAttribute("class","pay");
+    pay.innerHTML = " 书籍定价:"+paramMap.pay;
     book.appendChild(img);
     book.appendChild(bookname);
     book.appendChild(author);
     book.appendChild(pont);
+    book.appendChild(pay);
 </script>
 </html>

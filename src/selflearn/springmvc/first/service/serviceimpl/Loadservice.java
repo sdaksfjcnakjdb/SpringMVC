@@ -1,11 +1,9 @@
-package selflearn.springmvc.first.serviceimpl;
+package selflearn.springmvc.first.service.serviceimpl;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import selflearn.springmvc.first.Dao.UserDao;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.bean.UserBook;
-import selflearn.springmvc.first.mapper.load.LoadInterService;
+import selflearn.springmvc.first.service.LoadInterService;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -80,7 +78,7 @@ public class Loadservice implements LoadInterService {
         //context = new ClassPathXmlApplicationContext ("selflearn/springmvc/first/mapper/spring.xml");
 //        before();
 //        UserDao userDao = (UserDao) context.getBean ("userDao");
-        return loadservicel.userDao.selectByName (user);
+        return loadservicel.userDao.selectById (user);
     }
 
 

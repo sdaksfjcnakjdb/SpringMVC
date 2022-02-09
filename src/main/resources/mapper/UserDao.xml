@@ -43,5 +43,18 @@
         select  * from person where name = #{name}
     </select>
 
+    <!--修改储蓄-->
+    <update id="changemoney" parameterType="user">
+        update person set
+            money =  money + #{money}
+        where  id = #{id}
+    </update>
+
+    <!--会员功能-->
+    <update id="member" parameterType="user">
+        update person set
+            type =  #{type}
+        where  id = #{id}
+    </update>
 
 </mapper>

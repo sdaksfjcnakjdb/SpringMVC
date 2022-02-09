@@ -1,4 +1,4 @@
-package selflearn.springmvc.first.serviceimpl;
+package selflearn.springmvc.first.service.serviceimpl;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import selflearn.springmvc.first.Dao.BookDao;
 import selflearn.springmvc.first.Dao.UserBookDao;
-import selflearn.springmvc.first.Dao.UserDao;
 import selflearn.springmvc.first.bean.Book;
 import selflearn.springmvc.first.bean.User;
 import selflearn.springmvc.first.bean.UserBook;
@@ -75,6 +74,8 @@ public class Bookservice {
         before();
         return  bookservice.userBook;
     }
+
+
     //新增书籍,加入订阅
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public int insert(Book book, UserBook userBook){
@@ -82,7 +83,8 @@ public class Bookservice {
 //        BookDao bookDao = (BookDao) context.getBean ("BookDao");
         bookservice.bookDao.add (book);
         //人为制造错误
-        System.out.println(1/0);
+//        System.out.println(1/0);
+        userBook.setBookid(book.getId());
         addbook(userBook);
         return book.getId ();
         }
@@ -151,6 +153,7 @@ public class Bookservice {
 //        before();
 //        UserBookDao userbookDao = (UserBookDao) context.getBean ("userBookDao");
         bookservice.userbookDao.add (userBook);
+
     }
 
     //查询书籍是否在用户仓库中
@@ -163,6 +166,7 @@ public class Bookservice {
         }
         return true;
     }
+
 
 
 
@@ -191,7 +195,7 @@ public class Bookservice {
     bookservice.book.setFileUrl ("文件路径");
     bookservice.book.setImg ("图谱路径");
     bookservice.bookDao.add (bookservice.book);
-        System.out.println(1/0);
+        throw new RuntimeException("huigun");
 
     }
     @Test
